@@ -1,0 +1,78 @@
+FIND CAST FROM MOVIE NAME:
+
+CREATE VIEW avenger_cast as
+SELECT ACT_NAME,MOVIE_ROLE
+  FROM actor 
+	  JOIN movie_cast ON actor.ACT_ID = movie_cast.ACT_ID
+		JOIN movies ON movie_cast.MOV_ID=movies.MOV_ID 
+		  AND movies.MOV_TITLE='Avengers: 
+
+ACTOR WHO ACTED BETWEEN 1990 - 2000
+
+CREATE VIEW 90s_Actors AS
+SELECT ACT_NAME ,MOV_TITLE, MOV_YEAR
+FROM actor
+JOIN movie_cast 
+ON actor.ACT_ID = movie_cast.ACT_ID
+JOIN movies 
+ON movie_cast.MOV_id=movies.MOV_ID
+WHERE MOV_YEAR BETWEEN 1990 and 2000;
+
+
+ACTION GENRE MOVIE:
+
+CREATE VIEW action_movie AS
+SELECT MOV_TITLE, MOV_YEAR
+FROM movies
+JOIN genre
+ON genre.MOV_ID = movies.MOV_ID
+WHERE GENRE_TITLE1 = 'Action'or
+GENRE_TITLE2 = 'Action'OR
+GENRE_TITLE3 = 'Action';
+
+Drama Genre movies:
+
+CREATE VIEW Drama_Genre_movies AS
+SELECT MOV_TITLE, MOV_YEAR
+FROM movies
+JOIN genre
+ON genre.MOV_ID = movies.MOV_ID
+WHERE GENRE_TITLE1 = 'Drama'or
+GENRE_TITLE2 = 'Drama'OR
+GENRE_TITLE3 = 'Drama';
+
+HIGH RATED MOVIES:
+CREATE VIEW Highest_rated_Movie AS 
+SELECT MOV_TITLE, MOV_YEAR, REV_STARS
+FROM movies 
+NATURAL JOIN rating
+WHERE REV_STARS = (
+SELECT MAX(REV_STARS)
+FROM rating
+);
+
+RATING ABOVE 7:
+CREATE VIEW Rating_above_7_Movies AS 
+SELECT MOV_TITLE, MOV_YEAR, REV_STARS
+FROM movies 
+NATURAL JOIN rating
+
+
+..........................................
+CREATE VIEW Thrillermovies AS
+SELECT allmovie_pic.MOV_TITLE, allmovie_pic.MOV_YEAR, allmovie_pic.PIC
+FROM allmovie_pic
+INNER JOIN genre
+ON genre.MOV_TITLE = allmovie_pic.MOV_TITLE
+WHERE GENRE_TITLE1 = 'Thriller'or
+GENRE_TITLE2 = 'Thriller'OR
+GENRE_TITLE3 = 'Thriller';
+
+
+......................................
+CREATE VIEW thriller AS
+SELECT thrillermovies.MOV_TITLE, thrillermovies.MOV_YEAR, thrillermovies.PIC, rating.REV_STARS
+FROM thrillermovies 
+INNER JOIN rating 
+ON rating.MOV_TITLE = thrillermovies.MOV_TITLE
+
